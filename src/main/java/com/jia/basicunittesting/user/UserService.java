@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 @Service
 public class UserService {
@@ -39,5 +40,14 @@ public class UserService {
 
     void deleteUser(UUID userId) {
         userRepository.deleteById(userId);
+    }
+
+    private Boolean emailIsValid(String email) {
+        String emailRegex = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@" +
+                "((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])" +
+                "|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+
+        Pattern pat = Pattern.compile(emailRegex);
+        return pat.matcher(email).matches();
     }
 }
