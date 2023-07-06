@@ -12,7 +12,7 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    List<User> getAllUsers() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
@@ -21,7 +21,7 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    User createUser(UserDto userDto) {
+    public User createUser(UserDto userDto) {
         User user = new User();
         user.setName(userDto.getName());
         user.setAge(userDto.getAge());
